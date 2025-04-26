@@ -58,9 +58,9 @@ function useChat() {
         ...prev,
         { role: 'assistant', content: '...' }
       ]);
-      
-      // First send the message data to the backend
-      const response = await fetch('http://localhost:3000/api/chat', {
+        // First send the message data to the backend
+      // Use a relative URL that works both locally and in production
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

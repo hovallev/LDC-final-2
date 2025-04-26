@@ -131,10 +131,9 @@ To get started, you can select a concept from the left panel or ask me any quest
               backgroundColor: '#ffffff',
               borderRadius: '6px',
               border: '1px solid #0c1f3d',
-              padding: '8px'
-            }}>{/* Use the PNG logo which is more compatible */}
+              padding: '8px'            }}>{/* Use the PNG logo which is more compatible */}
               <img 
-                src="./assets/Bice-300x200-1.png" 
+                src="/assets/Bice-300x200-1.png" 
                 alt="Banco BICE Logo" 
                 style={{
                   maxWidth: '90%',
