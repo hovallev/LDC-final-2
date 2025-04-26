@@ -10,11 +10,7 @@
   "routes": [
     { "src": "/api/test-retrieval", "dest": "/ui/api/test-retrieval.js" },
     { "src": "/api/(.*)", "dest": "/ui/api/$1" },
-    { "src": "/test-retrieval", "dest": "/ui/test-retrieval.html" },
+    { "src": "/test-retrieval", "dest": "/ui/api/test-page.js" },
     { "src": "/(.*)", "dest": "/ui/$1" }
-  ],
-  "env": {
-    "DEEPSEEK_API_KEY": "@deepseek-api-key",
-    "COHERE_API_KEY": "@cohere-api-key"
-  }
+  ]
 }
