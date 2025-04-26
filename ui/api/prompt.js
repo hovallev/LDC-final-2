@@ -7,7 +7,7 @@ const defaultConceptTable = `
 |---|-------------------------------|-------------------------------------------------|-------------------------------------------------------------------------|
 | 1 | Change to Remain Unchanged    | Tie change to heritage so staff feel continuity.| Identity threat looms; linking moves to propósito BICE reduces resistance. |
 | 2 | Strategic Sparring Sessions | Data-backed debates surface hidden disagreement.| Prevents false consensus between Matte & ex-Security leadership.        |
-| 3 | Adaptive Space                | Autonomy + resource pool for experiments.       | Lets new mixed teams launch BaaS / wealth pilots without harming core ROE.|
+| 3 | Paradox Mindset              | Turn either/ors into both/ands to embrace tensions.| Helps balance conflicting priorities in merger: tradition vs innovation, stability vs growth.|
 `;
 
 /**

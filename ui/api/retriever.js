@@ -42,8 +42,8 @@ This concept focuses on tying changes to an organization's heritage and core val
 Concept 2: Strategic Sparring Sessions
 These are data-backed debates designed to surface hidden disagreements within leadership teams. By creating structured forums for productive conflict, organizations can prevent false consensus and build more robust strategies. Strategic sparring specifically addresses the "false consensus" adaptive challenge, using creative abrasion to improve decision quality.
 
-Concept 3: Adaptive Space
-This concept involves creating protected autonomy and resource pools for experiments and innovation outside normal operations. Adaptive space has clear autonomy, thoughtful connections to the core business, different metrics (learning vs. earning), with disputes arbitrated by top leaders who bias toward the new.`,
+Concept 3: Paradox Mindset
+This concept focuses on developing the ability to turn either/or situations into both/and solutions. Wendy K. Smith and Marianne Lewis define paradoxes as persistent, interdependent contradictions. A paradox mindset helps leaders embrace tensions such as work/life balance, planet/purpose goals, and sustaining while disrupting. Research shows that simply being exposed to paradox mindset concepts boosts creativity. Leaders can build this mindset through paradox quests (doing something against type), shifting perspectives, and conducting thought experiments with varying constraints.`,
 
   'Memoria_BICECORP_Summary': `
 BICECORP is undergoing transformative merger with Grupo Security to create one of Chile's three-largest private financial groups with >USD 34 billion in consolidated assets.
