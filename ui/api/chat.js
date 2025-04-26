@@ -1,83 +1,143 @@
-// Simplified API handler for Vercel serverless functions
-// No need to import NextResponse for basic API functionality
+// /api/chat.js
+import { NextResponse } from 'next/server';
+import { retrieveContext } from '../_utils/retriever.js';
+import { nextState } from '../_utils/fsm.js';
+import { SYSTEM } from '../_utils/prompt.js';
+import OpenAI from 'openai';
 
-// Basic state machine - simplified from your fsm.js
-function nextState(currentState, userInput) {
-  const input = (userInput || "").trim().toLowerCase();
-  
-  // Handle direct number inputs (1, 2, 3)
-  if (['1', '2', '3'].includes(input)) {
-    return `concept${input}`;
-  }
-  
-  // Default: remain in current state
-  return currentState;
-}
+// Initialize DeepSeek client using OpenAI SDK
+const deepseekClient = new OpenAI({
+  apiKey: process.env.DEEPSEEK_API_KEY,
+  baseURL: "https://api.deepseek.com/v1",
+});
 
-// Generate a response based on state
-async function generateResponse(messages, state) {
-  // A simple, hardcoded response system for testing
-  const lastMessage = messages[messages.length - 1]?.content || '';
-  
-  if (state === 'intro') {
-    return "Welcome to the LDC Coach Bot! I can help you learn about the three Leading Disruptive Change concepts. Type 1, 2, or 3 to select a concept.";
-  }
-  else if (state === 'concept1') {
-    return "You've selected Concept 1: Change to Remain Unchanged. This concept focuses on tying changes to an organization's heritage and core values. For Banco BICE, this means linking transformational moves to the company's purpose.";
-  }
-  else if (state === 'concept2') {
-    return "You've selected Concept 2: Strategic Sparring Sessions. These are data-backed debates designed to surface hidden disagreements within leadership teams.";
-  }
-  else if (state === 'concept3') {
-    return "You've selected Concept 3: Adaptive Space. This concept involves creating autonomy and resource pools for experiments and innovation.";
-  }
-  
-  return `I received your message: "${lastMessage}". What would you like to know about Leading Disruptive Change?`;
-}
+export const config = {
+  runtime: 'edge',
+};
 
-// Main API handler
-module.exports = async function handler(req, res) {
-  // Only allow POST requests
+export default async function handler(req) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
-  
+
+  // Set up SSE headers
+  const headers = {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  };
+
   try {
-    // Parse request body
     const body = await req.json();
     const { messages, currentState } = body;
-    
-    // Log the request for debugging
-    console.log('Received request:', { messagesCount: messages?.length, currentState });
-    
-    // Get the last user message
-    const lastUserMessage = messages?.find(m => m.role === 'user')?.content || '';
-    
-    // Determine next state
-    const newState = nextState(currentState, lastUserMessage);
-    
-    // Generate a response
-    const response = await generateResponse(messages, newState);
-    
-    // Set up headers for SSE
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-    
-    // Stream the response in chunks to simulate streaming
-    const chunks = response.match(/.{1,20}/g) || [];
-    
-    for (const chunk of chunks) {
-      res.write(`data: ${JSON.stringify({ chunk })}\n\n`);
-      // Small delay to simulate streaming
-      await new Promise(resolve => setTimeout(resolve, 100));
+
+    // Validate request
+    if (!messages || messages.length === 0) {
+      return new Response(JSON.stringify({ error: 'Missing or empty messages array' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
+
+    if (!currentState) {
+      return new Response(JSON.stringify({ error: 'Missing currentState' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const userMessage = messages[messages.length - 1];
+    if (userMessage.role !== 'user') {
+      return new Response(JSON.stringify({ error: 'Last message must be from user' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const userQuery = typeof userMessage.content === 'string' ? userMessage.content : '';
+    if (!userQuery) {
+      return new Response(JSON.stringify({ error: 'User message content is empty' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Determine next state based on user input
+    const calculatedNextState = nextState(currentState, userQuery);
     
-    // Send completion message
-    res.write(`data: ${JSON.stringify({ done: true, finalState: newState })}\n\n`);
-    res.end();
+    // Retrieve context
+    let contextString = "No relevant context found.";
+    try {
+      const retrievedDocs = await retrieveContext(userQuery, 3);
+      if (retrievedDocs.length > 0) {
+        contextString = retrievedDocs.map((doc, i) =>
+          `Context ${i + 1} (Source: ${doc.source}):\n${doc.content}`
+        ).join("\n\n---\n\n");
+      }
+    } catch (retrievalError) {
+      console.error("Error during context retrieval:", retrievalError);
+      contextString = "Error retrieving context.";
+    }
+
+    // Construct prompt for DeepSeek
+    const systemPrompt = SYSTEM();
+    const messagesForAPI = [
+      { role: 'system', content: `${systemPrompt}\n\nRelevant Context:\n${contextString}` },
+      ...messages.slice(-10).map(msg => ({ role: msg.role, content: msg.content }))
+    ];
+
+    // Create a new TransformStream for streaming the response
+    const stream = new TransformStream();
+    const writer = stream.writable.getWriter();
+
+    // Start the response streaming
+    const responseStream = stream.readable;
+    
+    // Asynchronously process the response
+    (async () => {
+      try {
+        // Call DeepSeek API & stream response
+        const aiStream = await deepseekClient.chat.completions.create({
+          model: "deepseek-chat",
+          messages: messagesForAPI,
+          stream: true,
+          temperature: 0.7,
+        });
+
+        // Process each chunk from DeepSeek
+        for await (const chunk of aiStream) {
+          const content = chunk.choices[0]?.delta?.content || "";
+          if (content) {
+            await writer.write(
+              `data: ${JSON.stringify({ chunk: content })}\n\n`
+            );
+          }
+        }
+
+        // Send final state update
+        await writer.write(
+          `data: ${JSON.stringify({ done: true, finalState: calculatedNextState })}\n\n`
+        );
+      } catch (error) {
+        console.error("Error streaming from DeepSeek:", error);
+        const errorMessage = error.message || "Error communicating with AI model.";
+        await writer.write(
+          `data: ${JSON.stringify({ error: errorMessage })}\n\n`
+        );
+      } finally {
+        await writer.close();
+      }
+    })();
+
+    return new Response(responseStream, { headers });
   } catch (error) {
-    console.error('API error:', error);
-    res.status(500).json({ error: 'Internal server error', details: error.message });
+    console.error('Error in chat handler:', error);
+    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }

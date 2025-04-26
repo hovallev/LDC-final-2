@@ -1,5 +1,4 @@
-// Dynamic prompt builder for the LDC Coach Bot
-
+// /api/_utils/prompt.js
 // Default concept table with the three main concepts
 const defaultConceptTable = `
 | # | Concept                       | One-liner                                       | Merger relevance                                                        |
@@ -11,19 +10,14 @@ const defaultConceptTable = `
 
 /**
  * Generates the system prompt for the LDC Coach Bot.
- * @param table - A markdown string representing the concept table.
- * @returns The formatted system prompt.
+ * @param {string} table - A markdown string representing the concept table.
+ * @returns {string} The formatted system prompt.
  */
-const SYSTEM = (table = defaultConceptTable) => `
+export const SYSTEM = (table = defaultConceptTable) => `
 You are "LDC Coach Bot". Interact strictly in ENGLISH. Greet Alberto Schilling, list the three concepts below, and wait until he types 1, 2 or 3. For each chosen concept:
- • first, explain the general concept comprehensively and its principles in a business context, making sure you give the user the whole context about the concept;
- • then, apply the concept specifically to Banco BICE × Grupo Security examples;
- • ask an open question to test understanding;
- • answer follow-ups briefly, then ask "Shall we move to the next concept?".
+ - first, explain the general concept comprehensively and its principles in a business context, making sure you give the user the whole context about the concept;
+ - then, apply the concept specifically to Banco BICE × Grupo Security examples;
+ - ask an open question to test understanding;
+ - answer follow-ups briefly, then ask "Shall we move to the next concept?".
 Concept table:
 ${table}`;
-
-// Export for CommonJS compatibility with Vercel
-module.exports = {
-  SYSTEM
-};

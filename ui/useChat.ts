@@ -1,31 +1,21 @@
 // ui/useChat.ts
-// React hook for managing chat state and interaction with the backend
-
 import { useState, useCallback, useEffect, useRef } from 'react';
-// Assuming a state type imported from fsm.ts - adjust path if needed
 import type { State } from '../src/fsm';
 
-console.log('useChat.ts loaded - Using simpler implementation');
-
-// Define message structure
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
 
-// Change to default export to fix module resolution issues
 function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  // Initialize state from FSM
   const [state, setState] = useState<State>('intro'); 
   
-  // Reference to EventSource for cleanup
   const eventSourceRef = useRef<EventSource | null>(null);
 
-  // Clean up EventSource on unmount
   useEffect(() => {
     return () => {
       if (eventSourceRef.current) {
@@ -37,9 +27,9 @@ function useChat() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInput(e.target.value);
   };
+
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>, customMessage?: string) => {
     e.preventDefault();
-    // Use custom message if provided, otherwise use input field value
     const messageText = customMessage || input.trim();
     if (!messageText) return;
 
@@ -49,17 +39,13 @@ function useChat() {
     setIsLoading(true);
     setError(null);
     
-    // Clean up any existing EventSource
-    if (eventSourceRef.current) {
-      eventSourceRef.current.close();
-    }    try {
-      // Add a temporary "thinking" message from the assistant
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: '...' }
-      ]);
-        // First send the message data to the backend
-      // Use a relative URL that works both locally and in production
+    // Add a temporary "thinking" message from the assistant
+    setMessages((prev) => [
+      ...prev,
+      { role: 'assistant', content: '...' }
+    ]);
+
+    try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -109,17 +95,13 @@ function useChat() {
                   { role: 'assistant', content: assistantResponse }
                 ]);
               }
-                // Handle completion
+              
+              // Handle completion
               if (data.done) {
                 if (data.finalState && data.finalState !== state) {
                   console.log(`State changing from ${state} to ${data.finalState}`);
-                  setState(data.finalState);
+                  setState(data.finalState as State);
                 }
-              }
-              
-              // Handle context information if available
-              if (data.contextInfo) {
-                console.log('Context retrieved:', data.contextInfo);
               }
               
               // Handle errors
@@ -138,12 +120,6 @@ function useChat() {
       console.error('Error fetching chat response:', err);
       setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       
-      // Clean up EventSource if the POST request fails
-      if (eventSourceRef.current) {
-          eventSourceRef.current.close();
-          eventSourceRef.current = null;
-      }
-      
       // Update the temporary message with an error
       setMessages((prev) => [
         ...prev.slice(0, -1), // Remove the temporary message
@@ -151,18 +127,20 @@ function useChat() {
       ]);
     } finally {
       setIsLoading(false);
-    }  }, [input, messages, state]);  return {
+    }
+  }, [input, messages, state]);
+
+  return {
     messages,
     input,
     handleInputChange,
     handleSubmit,
     isLoading,
     error,
-    state, // Expose current FSM state to the UI
-    setState, // Also expose setState for direct state control
-    setMessages, // Also expose setMessages for direct message control
+    state,
+    setState,
+    setMessages,
   };
 }
 
-// Add default export
 export default useChat;

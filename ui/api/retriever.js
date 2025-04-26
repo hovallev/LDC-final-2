@@ -1,26 +1,12 @@
-// Document retrieval using Cohere embeddings for Vercel serverless functions
-const { createClient } = require('@vercel/kv');
-const { CohereClient } = require('cohere-ai');
+// /api/_utils/retriever.js
+import { CohereClient } from 'cohere-ai';
 
 // Initialize Cohere client for embeddings
 const cohereClient = new CohereClient({
   token: process.env.COHERE_API_KEY,
 });
 
-// Initialize Vercel KV for storing embeddings (if available)
-let kv;
-try {
-  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-    kv = createClient({
-      url: process.env.KV_REST_API_URL,
-      token: process.env.KV_REST_API_TOKEN,
-    });
-  }
-} catch (error) {
-  console.error('Failed to initialize Vercel KV:', error);
-}
-
-// In-memory cache for embeddings when KV is not available
+// In-memory cache for embeddings
 let documentEmbeddings = null;
 let documentChunks = [];
 
@@ -88,31 +74,30 @@ function splitTextIntoChunks(text, chunkSize = 1000, overlap = 200) {
 }
 
 /**
- * Initialize document embeddings - either from KV or by generating them
+ * Calculate cosine similarity between two vectors
+ */
+function cosineSimilarity(vecA, vecB) {
+  let dotProduct = 0;
+  let normA = 0;
+  let normB = 0;
+  
+  for (let i = 0; i < vecA.length; i++) {
+    dotProduct += vecA[i] * vecB[i];
+    normA += vecA[i] * vecA[i];
+    normB += vecB[i] * vecB[i];
+  }
+  
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+/**
+ * Initialize document embeddings by generating them
  */
 async function initializeEmbeddings() {
   if (documentEmbeddings) {
     return;
   }
-  
-  // Try to get embeddings from KV store first
-  if (kv) {
-    try {
-      const cachedEmbeddings = await kv.get('document_embeddings');
-      const cachedChunks = await kv.get('document_chunks');
-      
-      if (cachedEmbeddings && cachedChunks) {
-        documentEmbeddings = cachedEmbeddings;
-        documentChunks = cachedChunks;
-        console.log('Loaded document embeddings from KV store');
-        return;
-      }
-    } catch (error) {
-      console.error('Failed to load from KV store:', error);
-    }
-  }
-  
-  // Generate embeddings if not available in KV
+
   try {
     console.log('Generating document embeddings...');
     
@@ -143,40 +128,11 @@ async function initializeEmbeddings() {
     });
     
     documentEmbeddings = embeddingResponse.embeddings;
-    
-    // Save to KV if available
-    if (kv) {
-      try {
-        await kv.set('document_embeddings', documentEmbeddings);
-        await kv.set('document_chunks', documentChunks);
-        console.log('Saved document embeddings to KV store');
-      } catch (error) {
-        console.error('Failed to save to KV store:', error);
-      }
-    }
-    
     console.log('Generated embeddings for', documentChunks.length, 'chunks');
   } catch (error) {
     console.error('Failed to generate embeddings:', error);
     throw error;
   }
-}
-
-/**
- * Calculate cosine similarity between two vectors
- */
-function cosineSimilarity(vecA, vecB) {
-  let dotProduct = 0;
-  let normA = 0;
-  let normB = 0;
-  
-  for (let i = 0; i < vecA.length; i++) {
-    dotProduct += vecA[i] * vecB[i];
-    normA += vecA[i] * vecA[i];
-    normB += vecB[i] * vecB[i];
-  }
-  
-  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
 /**
@@ -212,13 +168,9 @@ export async function retrieveContext(query, maxResults = 3) {
       content: result.chunk.text,
       source: result.chunk.metadata.source,
       similarity: result.similarity
-    }));  } catch (error) {
+    }));
+  } catch (error) {
     console.error('Error retrieving context:', error);
     return [];
   }
 }
-
-// Export for CommonJS compatibility with Vercel
-module.exports = {
-  retrieveContext
-};

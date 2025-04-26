@@ -1,14 +1,8 @@
-// FSM implementation for conversation state management
-
+// /api/_utils/fsm.js
 /**
  * Defines the possible states of the conversation.
- * Using CommonJS module format for Vercel compatibility
  */
-
-/**
- * Maps state values to display names
- */
-const stateDisplayNames = {
+export const stateDisplayNames = {
   'intro': 'Introduction',
   'concept1': 'Concept 1',
   'concept2': 'Concept 2',
@@ -22,7 +16,7 @@ const stateDisplayNames = {
  * @param {string} userInput The user's latest message text.
  * @returns {string} The next conversation state.
  */
-const nextState = (currentState, userInput) => {
+export const nextState = (currentState, userInput) => {
   const trimmedInput = userInput.trim().toLowerCase();
   
   // Handle direct number inputs (1, 2, 3)
@@ -30,44 +24,28 @@ const nextState = (currentState, userInput) => {
     return `concept${trimmedInput}`;
   }
   
-  // Handle "next" keyword to progress to the next concept
-  if (trimmedInput.includes('next') || trimmedInput.includes('move on')) {
-    switch (currentState) {
-      case 'intro':
-        return 'concept1';
-      case 'concept1':
-        return 'concept2';
-      case 'concept2':
-        return 'concept3';
-      case 'concept3':
-        return 'wrap';
-      default:
-        return currentState;
+  // Handle "concept X" style inputs
+  const conceptMatch = trimmedInput.match(/concept\s*([1-3])/i);
+  if (conceptMatch) {
+    return `concept${conceptMatch[1]}`;
+  }
+  
+  // Transition between concepts or to wrap-up based on "next"
+  if (/next/i.test(trimmedInput) || /go to wrap-?up/i.test(trimmedInput)) {
+    if (currentState === 'concept1') {
+      return 'concept2';
+    } else if (currentState === 'concept2') {
+      return 'concept3';
+    } else if (currentState === 'concept3') {
+      return 'wrap';
     }
   }
   
-  // Handle specific concept requests (e.g., "tell me about concept 2")
-  if (trimmedInput.includes('concept')) {
-    if (trimmedInput.includes('1') || 
-        trimmedInput.includes('one') || 
-        trimmedInput.includes('first')) {
-      return 'concept1';
-    } else if (trimmedInput.includes('2') || 
-              trimmedInput.includes('two') || 
-              trimmedInput.includes('second')) {
-      return 'concept2';
-    } else if (trimmedInput.includes('3') || 
-              trimmedInput.includes('three') || 
-              trimmedInput.includes('third')) {
-      return 'concept3';
-    }
+  // Handle direct wrap-up request
+  if (/wrap-?up/i.test(trimmedInput)) {
+    return 'wrap';
   }
-    // Default: remain in the current state
-  return currentState;
-};
 
-// Export for CommonJS compatibility with Vercel
-module.exports = {
-  stateDisplayNames,
-  nextState
+  // Otherwise, remain in the current state
+  return currentState;
 };
