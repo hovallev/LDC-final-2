@@ -2,13 +2,13 @@
 
 /**
  * Defines the possible states of the conversation.
- * In JS we don't need type definitions, so removing the TypeScript syntax
+ * Using CommonJS module format for Vercel compatibility
  */
 
 /**
  * Maps state values to display names
  */
-export const stateDisplayNames = {
+const stateDisplayNames = {
   'intro': 'Introduction',
   'concept1': 'Concept 1',
   'concept2': 'Concept 2',
@@ -22,7 +22,7 @@ export const stateDisplayNames = {
  * @param {string} userInput The user's latest message text.
  * @returns {string} The next conversation state.
  */
-export const nextState = (currentState, userInput) => {
+const nextState = (currentState, userInput) => {
   const trimmedInput = userInput.trim().toLowerCase();
   
   // Handle direct number inputs (1, 2, 3)
@@ -62,7 +62,12 @@ export const nextState = (currentState, userInput) => {
       return 'concept3';
     }
   }
-  
-  // Default: remain in the current state
+    // Default: remain in the current state
   return currentState;
+};
+
+// Export for CommonJS compatibility with Vercel
+module.exports = {
+  stateDisplayNames,
+  nextState
 };

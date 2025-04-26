@@ -1,6 +1,6 @@
 // Document retrieval using Cohere embeddings for Vercel serverless functions
-import { createClient } from '@vercel/kv';
-import { CohereClient } from 'cohere-ai';
+const { createClient } = require('@vercel/kv');
+const { CohereClient } = require('cohere-ai');
 
 // Initialize Cohere client for embeddings
 const cohereClient = new CohereClient({
@@ -212,9 +212,13 @@ export async function retrieveContext(query, maxResults = 3) {
       content: result.chunk.text,
       source: result.chunk.metadata.source,
       similarity: result.similarity
-    }));
-  } catch (error) {
+    }));  } catch (error) {
     console.error('Error retrieving context:', error);
     return [];
   }
 }
+
+// Export for CommonJS compatibility with Vercel
+module.exports = {
+  retrieveContext
+};

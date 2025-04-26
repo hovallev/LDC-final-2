@@ -1,9 +1,9 @@
 // Serverless API function for handling chat requests on Vercel
 // Full implementation of the LDC Coach Bot backend
-import { OpenAI } from 'openai';
-import { nextState } from './fsm.js';
-import { SYSTEM } from './prompt.js';
-import { retrieveContext } from './retriever.js';
+const OpenAI = require('openai');
+const fsm = require('./fsm');
+const prompt = require('./prompt');
+const retriever = require('./retriever');
 
 // Initialize the OpenAI/DeepSeek API client
 const openai = new OpenAI({
