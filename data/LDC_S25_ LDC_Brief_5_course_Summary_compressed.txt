@@ -1,0 +1,745 @@
+LEADING DISRUPTIVE CHANGE BRIEF #5
+This is the seventh time I have taught Leading Disruptive Change. And the seventh different
+summary note I have written. This one has the fewest changes from previous notes … either a sign
+that we’re collectively getting closer to figuring it all out, or it is time to reboot and remix and see
+what new stuff emerges.
+The text that follows covers the six propositions, eleven practices and twenty-three tools we
+discussed in class.1 Before that, a couple of reflections …
+Brendan connected the class to the line of Tuck’s mission: “LEADERS have the ability to craft a
+compelling vision for the future and to guide execution with and through other people.” Yes. Take a
+future-back frame to amplify weak signals and use history as a catalyst to create an inspiring view
+of the future. And recognize that getting there requires … all of the things we talked about.
+Bruce eloquently summed up his view of the class in a note to me: I came to this class with
+questions and skepticism as I often find myself struggling with identifying and implementing
+imperative changes within my organization, from my past career when I was a
+founder/entrepreneur. Throughout the nine sessions, I realized that instead of trying to find the
+"right" answer and bet on it, leaders have to deal with the fog, uncertainty, and chances of failure.
+What we can do is to (1) acknowledge that changes should be constant (2) it's important to take a
+systematic approach in identifying and implementing changes (3) be aware of the ghosts and
+unspoken voices in the room/organization (4) providing psychological safety and empowering other
+people to drives changes can go a long way... (and more).
+Clay used the metaphor of lenses. He said his wife Christine used to joke he had the disruptive
+diagram etched onto his glasses. My INSEAD program also used the metaphor, saying that it gave
+us night vision goggles so we could see what lurked in the shadow. More than anything else, I hope
+this class provides you with (1) a sense that there is more to the story, (2) the desire to pause and
+understand what that more is, (3) a sense of lenses to see what you would otherwise miss. All of
+that in service of the line from How Will You Measure Your Life?
+Management is the most noble of professions if it’s practiced well. No other occupation offers as
+many ways to help others learn and grow, take responsibility and be recognized for
+achievement, and contribute to the success of a team.
+Ok, that’s enough throat clearing. Onto the good stuff.
+
+1 For those scoring at home, the winter had six propositions (though in different order, I did paradox mindset in
+
+Class 4 in the winter), twelve practices, and twenty-one tools. I have a core set that are definitely covered, and
+then the rest depend on where the universe takes us.
+
+This note was prepared as the basis for class discussion. No part of this publication may be reproduced,
+stored in a retrieval system, used in a spreadsheet, or transmitted in any form or by any means—
+electronic, mechanical, photocopying, recording, or otherwise—without the permission of Dartmouth
+College.
+© 2025 Trustees of Dartmouth College. All rights reserved.
+
+LDC SPRING 2025
+THE SIX PROPOSITIONS OF LEADING DISRUPTIVE CHANGE
+Proposition I: You need to lead through fog.
+Technologies are advancing exponentially, lines between industries are blurring, expectations of
+consumers, employees, and stakeholders are shifting, and global shocks are happening with
+increased frequency. It is the era of predictable unpredictability, or what The Economist dubbed
+“permavucalotion.”
+The forever normal of constant change places leaders in a thick fog. Data to justify making a
+decision comes in when it is too late to make a decision. Yesterday’s strengths become
+tomorrow’s weaknesses.
+In this fog, leaders must confront complex challenges that feel paradoxical. Pursue purpose by
+embracing sustainability and maximize profits by extracting and exploiting resources. Protect the
+present and create the future. Enable empowerment and autonomy and decisively lead in new
+directions. Build a high-performance meritocracy and provide equitable opportunities and
+outcomes.
+You want to be a wise, decisive leader that betters the world through business? You need to lead
+through fog.
+Proposition II: You need to understand the particular nature of adaptive challenges.
+Some problems are technical in nature. There is a best answer. There is expertise that can solve it.
+Your job as a leader, therefore, is to build (or find) the expertise, and solve the problem.
+In the fog you find adaptive challenges that have no clear best answer. They are messy. There is the
+possibility of loss and the certainty of struggle. Learning to read sheet music is a technical
+challenge. Playing in a jazz band is an adaptive one. Acing a test is a technical challenge. Acing a
+relationship is an adaptive one. Adaptive challenges can sneak up on you. For example,
+implementing a new IT system feels like a technical challenge. But a new IT system typically
+changes the way work flows and shifts power dynamics. These are classic tipoffs of an adaptive
+challenge.
+Disruptive change is a highly adaptive challenge. A disruptive innovaiton transforms what exists or
+creates what doesn’t by making the complciated simple and the expensive affordable. It combines
+three “Ps”: purposeful tradeoffs (less raw performance, more conveinece, accessibility,
+affordabiltiy), a protected starting point (amongst customers happy to receive said tradeoffs), and a
+powerful business model that inhibits incubment response. There isn’t a single best way to
+navigate disruptive change. There is the possibiltiy of loss. There is the certainy of struggle. A
+textbook adaptive challenge.
+Proposition III: Technical solutions are necessary but insufficient to solve adaptive challenges.
+In the IHC case, we talked about five technical tools to drive transformation, building off research
+and writing in Dual Transformation, a 2017 book I co-authored with Clark Gilbert and Mark Johnson.
+1. Future-back strategy: Clear vision of the future and clear choices about how to strengthen
+the core and build new businesses.
+
+Page 2
+
+LDC SPRING 2025
+2. Organization design: Structures that are consistent with and support the future-back
+strategy, with a particular focus on how to build and share capabilities across core and new
+businesses (“the capabilities link”).
+3. Enabling systems: Processes and systems to effectively measure and manage a portfolio
+of strategic initiatives.
+4. Classic change management: Investment to manage the process of change via leadership
+role modeling, addressing organizational blockers, and getting small wins.
+5. Communication: Clear, consistent, compelling communication of the vision and key
+strategic choices that help ensure organizational alignment / conviction.
+I went through these quickly, as you either have learned or will learn about versions of these in your
+other classes. You need to do these things. You can’t succeed without them.
+But they are insufficient.
+As Brené Brown notes, “Leaders must either invest a reasonable amount of time attending to fears
+and feelings or squander an unreasonable amount of time trying to manage ineffective and
+unproductive behavior.” Technical tools provide no more than 49% of the final answer. As we went
+through the class, we built up the adaptive challenges to each of those five areas and discussed
+ways to overcome them.
+Adaptive Challenge
+
+LDC Answer
+
+Future-back strategy
+
+False consensus
+
+Strategic sparring sessions
+
+Organization design
+
+Status quo bias
+
+Adaptive space and/or culture
+of innovation
+
+Enabling system
+
+Ambiguity effect
+
+Emergent strategy
+
+Ghosts
+
+BEANs
+
+Identity threat
+
+Change to remain unchanged
+
+Classic change management
+Communication
+
+Proposition IV: Solving adaptive challenges requires inducing and managing discomfort.
+Stare, once again, at perhaps my favorite chart (adapted from The Practice of Adaptive Leadership
+by Heifetz, Grashow & Linsky, 2009):
+
+Page 3
+
+LDC SPRING 2025
+
+Learning comes when we are uncomfortable. No
+discomfort, no learning. That means leaders must
+purposefully make their organizations uncomfortable
+if they want to change them. Too much discomfort,
+however, and people look for relief. That shows up as
+“work avoidance.” Set up a committee (“other” the
+problem). Re-organize (even if that almost never
+works). Hire a consultant. Turn them into a scapegoat.
+Find someone else to blame. Politicians. Regulators.
+Activist investors. Passive long-term investors.
+External events. Whatever it takes to avoid the
+discomfort. The ”hero” systems psychodynamics
+paper called these “social defenses.” They are very
+real.
+Your job as a leader is to manage this discomfort.
+Think of the athletic training metaphor we talked
+about in class. Train. Rest. Recover. Repeat.
+Throughout class we talked about various tools to
+help with this. Psychological safety. Purposeful play.
+Premortems. Blameless postmortems. I sometimes
+think about just using this chart to guide the entire
+class. If you master it, you go a long way to mastering
+how to lead disruptive change.
+I have no idea what the HI-BBORANG is in the AI-generated image. The rest I think is pretty sweet.
+
+Page 4
+
+LDC SPRING 2025
+Proposition V: Go deep to find the real problem.
+By the time the data are clear, it is too late (information-action paradox). Seek early warning signs
+of disruptive change. Use models and frameworks to amplify them. And recognize that your
+success in helping others see them and act on them requires going deeper.
+Kurt Lewin teaches us that human behavior is a function of a person and their environment. Culture
+is not what you see or what people say, it is what people do and why they do it. The deeper you go,
+the more you find that every organization has ghosts. Past traumas. Invisible patterns. Fear of
+identity loss. Spike into the organization’s subconscious to find them.
+Then, remember that every individual (including you!) has their own “immunity to change.” Spike
+into your own subconscious to find yours. The work described in the class is hard. If you are
+focusing on the wrong issue, you will get stuck or overload your organization.
+Proposition VI: Both/and it with a paradox mindset.
+Wendy K. Smith and Marianne Lewis define paradoxes as persistent, interdependent
+contradictions. In the course we discussed philosophical paradoxes, such as the Ship of Theseus
+and Abilene paradoxes, and more practical paradoxes, such as the information-action paradox
+(data are only conclusive when it is too late to act) and paired issues that appear difficult to pursue
+simultaneously such as work/life, planet/purpose, and sustain/disrupt.
+Now, the paradoxes of adaptive change are not truly paradoxes because the right mindset and
+approach can overcome them, but they often look and feel like them. 2 Therefore, a paradox
+mindset that relishes these kinds of challenges, that seeks to turn either/ors into both/ands (or
+more/thans), is a critical enabler of success.
+In class, I shared that research shows that even simple exposure to the elements of the paradox
+mindset inventory helps to boost creativity. And my post-class note suggested three other ways to
+build a paradox mindset:
+1. Go on a paradox quest. Purposefully do something against type. New experiences provide
+new frames and perspectives. For example, if you get offered an international assignment,
+say yes.
+2. Shift perspectives. Take on a different persona. Shift your time frame. If you are in a big
+company imagine being in a startup. If you are in a startup company imagine being in a big
+one. Generative AI is a phenomenal tool to do this easily.
+3. Do thought experiments where you purposefully impose or remove constraints. What if
+money wasn’t an object? What if you had zero dollars? What if you were barred from selling
+your core product? How does the answer change if the time frame is a minute, day, week,
+month, year, decade, or century?
+
+2 This was the subject of the thesis of my Executive Master in Change program.
+
+https://flora.insead.edu/fichiersti_wp/InseadEMCtheseswave31/97995.pdf if you are really interested. I’m not
+offended if you are not. There’s a shorter article that gets to the highlights:
+https://sloanreview.mit.edu/article/the-hidden-opportunity-in-paradoxes/.
+
+Page 5
+
+LDC SPRING 2025
+ELEVEN PRACTICES TO LEAD DISRUPTIVE CHANGE
+What’s the difference between a “practice” and a “tool” you might wonder? It’s fuzzy, for sure, but
+a practice to me is a level higher, it is as much a way of thinking as it is a specific set of steps or a
+checklist. I sometimes brand these paradoxical practices … but they aren’t truly paradoxical. They
+are things that again feel counterintuitive, oxymoronic, or sometimes even silly.
+In this run of Leading Disruptive Change we covered …
+A. Act when the data tells you not to (KWM). Amplify weak signals to preempt ending up on a
+burning platform.
+B. Lead by letting go (Pampers & Shiseido) and enable experiments to generate convincing
+data. As Scott Cook from Intuit said, “We want our leaders to be coaches and facilitators,
+not decision makers. The experiments that the team runs should provide the data to help
+the team make decisions, so the leader doesn’t have to.”
+C. Hear the voice that doesn’t speak (IHC). Your team is less aligned than it appears. Avoid the
+Abilene paradox by acting like an anthropologist to understand how people really feel.
+D. Disagree to agree (IHC). Linda Hill from Harvard Business School says, “You don’t get
+innovation without diversity and conflict, and that means leaders need to build a capability
+for creative abrasion.” So, use strategic sparring sessions—data-informed dialogues that
+feature battles of assumptions vs. beliefs (don’t start sentences with “I”!) and techniques
+such as walk the line—to surface and address misalignment. Remember the power of the
+discussion about Tuck Nice vs. Tuck Kind!
+E. Change to remain unchanged (Shiseido): Develop a “historical consciousness” that might
+bound your imagination but helps overcome hidden fear of identity change.
+F. Find comfort in discomfort (Post-observation activity discussion). Borrow techniques from
+the military and athletics to find calm in the chaos of uncertainty. Deliberate practice,
+mentalization, reflection, pausing, breathing, and journaling are all effective ways to do
+this.
+G. Slow down to speed up (Post-observation activity discussion): The “wild boar” video
+highlighted the difference between the NFL players, who turned and ran when they heard a
+wild boar, and the FBI, who stopped to assess the situation. Taking the time to understand
+circumstances or give space to find the real problem is often a key to success. As William
+James noted, “The greatest weapon against stress is our ability to choose one thought over
+another.”
+H. Forget to learn (Post-observation activity discussion). The hardest people to teach new
+things are the smartest people. That’s partially because they have the most to unlearn, and
+partially because they aren’t used to the struggle that goes along with learning. Remember
+the backwards bike video. It took Destin Sandlin eight months of careful practice to learn
+how to ride it; it took his young son two weeks. You have to forget before you can learn (this
+connects to Vijay Govindarajan’s famous three-box framework!).
+
+Page 6
+
+LDC SPRING 2025
+I.
+
+Fail to succeed (Pampers). Disruptive success comes from following an emergent strategy,
+where you need to expect and celebrate deviations. Tools like premortems, postmortems,
+and failure resumes help to make you adept in ambiguity.
+
+J. Decisively hedge (Pampers). Every idea is partially right and partially wrong. Take action but
+leave room for iteration by running a controlled experiment. Do it with the discipline of a
+scientist where you have a hypothesis (what you expect will happen), design an experiment
+with an objective (the purpose of your test), make a prediction (as specific as possible to
+maximize learning potential), and execute in a way that allows you to track and measure
+your prediction. You never know for sure, so have HOPE!
+K. See the invisible (DBS). The biggest barriers to change are the ones that you can’t see. What
+do people really think? What do they really feel? Draw out and disarm the ghosts inhibiting
+change. The word draw is intentional – one technique that we talked about a bit in class was
+using drawing and images to pull things out from the subconscious. It works.
+Others practices that didn’t come up in class but are also fun …
+Be a skeptical optimist … deliberately wander … destroy to create … be an optimistic pessimist …
+go backwards to go forwards … liberate with constraints … negate to affirm … quit to start …
+release to control … shift lenses to see clearly … transform to sustain … value the invaluable …
+when in doubt, take a stand … zoom out to see the small picture.
+TWENTY-THREE TOOLS TO LEADING DISRUPTIVE CHANGE
+We talked about 23 tools in class (in varying degrees of depth). The table below describes the tools
+and provides a reference visual. It also includes a link to relevant material, where appropriate. The
+tools appear in alphabetical order.
+TOOL
+
+REFERENCE VISUAL
+
+Adaptive Checklist
+Three signs suggest a challenge is
+adaptive.
+1. There is not a single best
+answer
+2. There is the possibility
+someone will lose
+3. There is a certainty that
+people will struggle
+The image is old school AI’s finest.
+
+Page 7
+
+LDC SPRING 2025
+
+TOOL
+
+REFERENCE VISUAL
+
+Adaptive Space
+An organizational construct to
+bridge the gap between “explore”
+and “exploit,” that has autonomy,
+thoughtful connections to the core
+business, and different metrics
+(learning vs. earning), with disputes
+arbitrated by top leaders (who bias
+towards the new).
+Adaptive Support
+Hands-on support from multiple
+angles (teacher, coach, consultant,
+therapist) to help to identify and
+address hidden assumptions &
+barriers to change. Adaptive
+support seeks engagement in what
+can be difficult, emotional topics
+and creates space and time for
+people to process change.
+
+Advice / Answers
+
+How to Think
+
+Objectivity
+
+Confidence
+
+Associative Thinking
+Using images and analogies to spot
+hidden connections between
+items. Steve Jobs was once asked
+what made him so creative.
+“Creativity is just connecting
+things. When you ask creative
+people how they did something,
+they feel a little guilty because they
+didn’t really do it, they just saw
+something.”
+
+Page 8
+
+LDC SPRING 2025
+
+TOOL
+
+REFERENCE VISUAL
+
+BEANs
+Behavior Enablers, Artifacts and
+Nudges are “reinforced rituals” that
+overcome inertia and encourage
+new habits. Remember to:
+• Be specific about desired
+behaviors and blockers.
+• Borrow ideas from others.
+• Keep it simple, fun, and
+memorable.
+• Connect into key systems.
+For more, see “Breaking Down the
+Barriers to Innovation.”
+Blameless Postmortems
+After something bad happens, seek
+to find out why something bad
+happened instead of who did
+something wrong. Even if someone
+DID do something wrong, ask what
+led to the mistake (e.g., poor
+training, lack of control
+mechanisms). The picture is David
+Coulthard, whose story I told in
+class to illustrate the point.
+Early Warning Signs of Disruptive
+change
+A checklist to identify signs of
+disruptive change early enough to
+allow action.
+For more, see LDC Brief #1.
+
+Page 9
+
+LDC SPRING 2025
+
+TOOL
+
+REFERENCE VISUAL
+
+Emergent Strategy / First Mile
+tools
+Ways to identify and manage
+strategic assumptions, enabled by
+the mindset that the right strategy
+for an early-stage idea is unknown
+and unknowable.
+For more, see LDC Brief #4.
+Failure Resume
+The “greatest hits” of your failures,
+describing what the failure was,
+why it was a failure, and what you
+learned from it. The inevitable
+lesson is that failure is rarely fatal
+and indeed helps to shape who we
+are. The image is a couple lines
+from my failure resume.
+For more see this link.
+Fair Process
+People prefer procedural justice,
+where they feel like the process is
+fair (they have a chance to share
+their perspective and that
+perspective is considered), to
+distributive justice, where they feel
+like the results are fail. Process
+over outcomes! Image is from an
+INSEAD knowledge article about
+fair process.
+
+Page 10
+
+LDC SPRING 2025
+
+TOOL
+Ghost Identification Guide
+Questions to identify the presence
+of ghosts “haunting” efforts to drive
+change.
+
+REFERENCE VISUAL
+Type of ghost
+
+Description
+
+Influence
+
+Diagnostic questions
+
+Past
+
+Historical trauma
+that continues to
+have current
+impact
+
+Associations to
+past trauma
+trigger defense
+mechanisms
+
+1. What story is everyone afraid to talk about?
+
+An invisible
+pattern in rituals
+such as
+budgeting,
+project, decision
+meetings, or
+performance
+reviews
+
+Deeply imprinted
+patterns are
+invisible to
+insiders and
+therefore hard to
+overcome
+
+1. What might an outsider see that an insider
+might miss?
+
+Fear of change
+efforts that
+invalidate an
+organization’s
+self-identity
+
+Defensive
+reactions to
+change efforts
+that are
+unconsciously
+perceived to be
+self-destructive
+
+1. What words do people use to identify
+themselves?
+
+Present
+
+For more see “What Lies Beneath.”
+Future
+
+2. What story can’t everyone stop talking about?
+3. What past leader’s presence is still felt today?
+
+2. What function’s voice carries the most weight
+in key meetings?
+3. What unstated criteria guide participation and
+decisions?
+
+2. What historically made an organizational hero?
+What are people proud of?
+3. What potential changes affect people’s selfidentity and points of pride?
+
+History ABCs
+An organization’s history matters.
+Left unexamined, it can serve as an
+anchor that inhibits change.
+Tapping into how change maintains
+a connection to the past can turn it
+into ballast that provides stability.
+Bounded imagination creates a
+catalyst for future growth.
+How to Build a Paradox Mindset
+Mechanisms to develop the ability
+to turn either/ors into both/ands.
+The picture shows my “paradox
+quest” as a student at INSEAD in
+my mid-40s. A paradox quest is a
+purposeful effort to do something
+against type and therefore
+strengthen the ability to have
+comfort with discomfort.
+Immunity to Change
+A framework to identify where an
+individual or organization is
+naturally protecting themselves
+from change that feels harmful.
+For more, see “The Real Reason
+People Won’t Change.”
+
+Page 11
+
+LDC SPRING 2025
+
+TOOL
+
+REFERENCE VISUAL
+
+Paradox Mindset Inventory
+An academically grounded battery
+of questions to identify the ability to
+draw energy from tensions that also
+spurs creativity when introduced.
+For more, see the Paradox Mindset
+Inventory.
+Premortems
+A thought experiment where you
+ask about what could cause
+something to fail. It is space to
+catastrophize and think about the
+worst possibilities and identify
+lessons from a reference class of
+previous efforts. The image is a premortem I did with a client that
+helped it realize the biggest enemy
+was internal
+Psychological Safety
+An environment where people feel
+like they can speak openly without
+fear of punishment and intelligent
+failure is celebrated. The picture is
+Amy Edmondson, whose research
+identified the concept.
+Purposeful Play
+Here’s how I summarized it in an
+MIT Sloan review article: “Make it
+safe for your teams to play around
+with new technologies. Give them
+time, the tools, and maybe some
+rough guidelines. But don’t set
+specific objectives or demand
+specific outcomes. Let them
+explore and have fun. Do it with
+them. Screw up. Smile. Share.”
+Image is the playground spinner!
+
+Page 12
+
+LDC SPRING 2025
+
+TOOL
+
+REFERENCE VISUAL
+
+Running Reflections
+A reflection is a pause to check
+assumptions, sense feelings, and
+make hidden connections.
+Materials for Session 6 contain a
+checklist for running reflections.
+The picture is one I took at the
+Innosight offsite where I debuted
+reflections as an activity.
+Strategic Sparring Sessions
+A way to surface and share differing
+assumptions driving lack of group
+alignment. Key enablers are a
+common language for the
+discussion, including “the goals
+and bounds” of future business and
+intentional design and approach.
+For more, see “Building Consensus
+Around Difficult Strategic
+Decisions.”
+Subconscious spike toolkit
+A set of techniques to go beneath
+the surface of an organization and
+identify hidden barriers to change.
+For more, see LDC Brief #3.
+
+Page 13
+
+LDC SPRING 2025
+
+TOOL
+
+REFERENCE VISUAL
+
+Technical Toolkit
+A set of tools drawn from Dual
+Transformation to create the
+condition where successful
+transformation is possible.
+Remember, these tools are
+necessary but insufficient!
+For more, see LDC Brief #2.
+Trust Triangle
+Diverse teams outperform nondiverse teams when there is trust.
+Without trust, people revert to the
+lowest common denominator,
+which leads to underperform. Trust
+comes when people do what they
+say they will do (logic), are who they
+are (authenticity), and act with
+empathy.
+For more see “Begin with Trust.”
+
+Page 14
+
+LDC SPRING 2025
+GOING DEEPER PART ONE … THE LEADING DISRUPTIVE CHANGE READING LIST
+Some of these are books that connect directly to concepts we discussed in class, some of these
+are books I have just found to be particularly interesting or noteworthy on the broader theme of
+leading disruptive change. If you want any more specific recommendations on a specific space, let
+me know, there’s a lot more!
+***
+Scott D. Anthony, The First Mile: A Launch Manual for Getting Great Ideas to Market (Harvard
+Business Review Press, 2014).
+Scott D. Anthony, Clark Gilbert, and Mark Johnson, Dual Transformation: How to Reposition
+Today’s Business While Creating the Future (Harvard Business Review Press, 2017)
+Scott D. Anthony, Natalie Painchaud, Andy Parker, and Paul Cobban, Eat, Sleep, Innovate: How to
+Make Creativity an Everyday Habit Inside Your Organization (Harvard Business Review Press, 2020).
+Christian Busch, The Serendipity Mindset: The Art and Science of Creating Good Luck (Riverhead
+Books, 2020).
+Brené Brown, Dare to Lead: Brave Work. Tough Conversations. Whole Hearts (Random House
+Publishing Group, 2018).
+Ed Catmull with Amy Wallace, Creativity, Inc.: Overcoming the Unseen Forces That Stand in the
+Way of True Inspiration (Random House Publishing Group, updated version 2023).
+Clayton M. Christensen, The Innovator’s Dilemma: When New Technologies Cause Great Firms to
+Fail (Harvard Business Review Press, 1997).
+Clayton M. Christensen, James Allworth, and Karen Dillon, How Will You Measure Your Life?
+(HarperCollins 2012).
+Carol S. Dweck, Mindset: The New Psychology of Success (Random House, 2006).
+Amy Edmondson, Right Kind of Wrong: The Science of Failing Well (Simon Element, 2023).
+Amy Edmondson, The Fearless Organization: Creating Psychological Safety in the Workplace for
+Learning, Innovation, and Growth (Wiley, 2018).
+Bent Flyvbjerg, Dan Gardner, How Big Things Get Done: The Surprising Factors That Determine the
+Fate of Every Project, from Home Renovations to Space Exploration and Everything In Between
+(Crown Currency, 2023).
+Frances X. Frei and Anne Morriss, Unleashed: The Unapologetic Leader's Guide to Empowering
+Everyone Around You (Harvard Business Review Press, 2020).
+Robert Frost, The Poetry of Robert Frost.
+W. Timothy Gallwey, Inner Game Of Tennis, 50th Anniversary Edition (Random House, 2024).
+Adam Grant, Think Again: The Power of Knowing What You Don’t Know (Viking, 2021).
+Ronald Heifetz, Alexander Grashow, and Marty Linksy, The Practice of Adaptive Leadership: Tools
+and Tactics for Changing Your Organization and the World (Harvard Business Review Press, 2009).
+J. Doyne Farmer, Making Sense of Chaos (Yale University Press, 2024)
+
+Page 15
+
+LDC SPRING 2025
+Bob Johansen, Full-Spectrum Thinking: How to Escape Boxes in a Post-Categorical Future (BerrettKoehler Publishers, 2020).
+Mark W. Johnson and Josh Suskewicz, Lead from the Future: How to Turn Visionary Thinking Into
+Breakthrough Growth (Harvard Business Review Press, 2020).
+Robert Kegan and Lisa Laskow Lahey, Immunity to Change (Harvard Business Review Press, 2009).
+Dacher Keltner, Awe: The New Science of Everyday Wonder and How It Can Transform Your Life
+(Penguin Press, 2023).
+Hasard Lee, The Art of Clear Thinking: A Stealth Fighter Pilot's Timeless Rules for Making Tough
+Decisions (St. Martin’s Press, 2023).
+Donella H. Meadows, Thinking in Systems: A Primer (Chelsea Green Publishing, 2008).
+Katy Milkman, How to Change: The Science of Getting from Where You Are to Where You Want to
+Be (Portfolio, 2021).
+Ethan Mollick, Co-Intelligence: Living and Working with AI (Portfolio, 2024).
+Kyle Nel, Nathan Furr, and Thomas Zoëga Ramsø, Leading Transformation: How to Take Charge of
+Your Company’s Future (Harvard Business Review Press, 2018).
+Wendy K. Smith and Marianne Lewis, Both/And Thinking: Embracing Creative Tensions to Solve
+Your Toughest Problems (Harvard Business Review Press, 2022).
+David Spiegelhalter, The Art of Uncertainty: How to Navigate Chance, Ignorance, Risk and Luck
+(Pelican, 2024).
+Philip E. Tetlock and Dan Gardner, Superforecasting: The Art and Science of Prediction (Crown,
+2015).
+
+GOING DEEPER PART TWO … PODCASTS AND VIDEOS
+Someone asked in a post-class comment about podcasts to explore the topics in class more
+deeply. Here’s a few, and links to a couple videos as well. I’d love to make this an organic list, so if
+you find something that speaks to you, let me know!
+Brené Brown and Linda Hill. Living with Purpose in the Digital Age
+https://brenebrown.com/podcast/leading-with-purpose-in-the-digital-age/
+Brené Brown and Amy Webb, What’s Coming (and What’s Here)
+https://brenebrown.com/podcast/whats-coming-and-whats-here/
+Me with Amy Edmondson, Right Kind of Wrong
+https://thedisruptivevoice.libsyn.com/119-right-kind-of-wrong-a-conversation-with-amyedmondson
+Ezra Klein and Jonathan Haidt, Our Kids Are the Least Flourishing Generation We Know Of
+https://www.nytimes.com/2025/04/01/opinion/ezra-klein-podcast-jonathan-haidt.html
+The Economist with Adam Grant, “Can we learn to disagree better?”
+https://www.economist.com/podcasts/2022/08/04/can-we-learn-to-disagree-better
+
+Page 16
+
+LDC SPRING 2025
+Me with Pontus Siren and Utsav Bhatt, The Information-Action Paradox—and What to Do About It
+https://thedisruptivevoice.libsyn.com/90-the-information-action-paradox-and-what-to-do-aboutit-a-conversation-with-scott-anthony-pontus-siren-and-utsav-bhatt
+Me on Harvard Business Review, To Reinvent Your Firm, Do Two Things at the Same Time
+https://hbr.org/podcast/2017/04/to-reinvent-your-firm-do-two-things-at-the-same-time
+How a New Leader Broke Through a Culture of Abuse, Blame, and Criticize
+https://hbr.org/podcast/2019/09/how-a-new-leader-broke-through-a-culture-of-accuse-blameand-criticize
+HBR on Leadership Lynn Perry Wooten, How to Prepare For—And Lead Through—a Crisis
+https://hbr.org/podcast/2025/03/how-to-prepare-for-and-lead-through-a-crisis
+Videos:
+•
+•
+•
+
+Me and Ed Catmull: https://www.youtube.com/watch?v=Ts3C8fYgWgw
+Me and Berkeley Cox (KWM): https://www.youtube.com/watch?v=lNvkBD4Sabk
+The Innosight work at ASO: https://www.youtube.com/watch?v=F4btyHM2480
+
+Page 17
+
+
