@@ -1,8 +1,10 @@
-// /api/_utils/fsm.js
+// ui/api/fsm.js
+// Finite-state machine for conversation flow
+
 /**
- * Defines the possible states of the conversation.
+ * Maps state values to display names
  */
-export const stateDisplayNames = {
+const stateDisplayNames = {
   'intro': 'Introduction',
   'concept1': 'Concept 1',
   'concept2': 'Concept 2',
@@ -16,7 +18,7 @@ export const stateDisplayNames = {
  * @param {string} userInput The user's latest message text.
  * @returns {string} The next conversation state.
  */
-export const nextState = (currentState, userInput) => {
+function nextState(currentState, userInput) {
   const trimmedInput = userInput.trim().toLowerCase();
   
   // Handle direct number inputs (1, 2, 3)
@@ -48,4 +50,9 @@ export const nextState = (currentState, userInput) => {
 
   // Otherwise, remain in the current state
   return currentState;
+}
+
+module.exports = {
+  stateDisplayNames,
+  nextState
 };

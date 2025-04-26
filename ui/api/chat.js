@@ -1,9 +1,8 @@
-// /api/chat.js
-import { NextResponse } from 'next/server';
-import { retrieveContext } from '../_utils/retriever.js';
-import { nextState } from '../_utils/fsm.js';
-import { SYSTEM } from '../_utils/prompt.js';
-import OpenAI from 'openai';
+// ui/api/chat.js
+const { retrieveContext } = require('./retriever.js');
+const { nextState } = require('./fsm.js');
+const { SYSTEM } = require('./prompt.js');
+const { OpenAI } = require('openai');
 
 // Initialize DeepSeek client using OpenAI SDK
 const deepseekClient = new OpenAI({
@@ -11,64 +10,47 @@ const deepseekClient = new OpenAI({
   baseURL: "https://api.deepseek.com/v1",
 });
 
-export const config = {
-  runtime: 'edge',
-};
-
-export default async function handler(req) {
+module.exports = async function handler(req, res) {
+  // Only allow POST requests
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   // Set up SSE headers
-  const headers = {
-    'Content-Type': 'text/event-stream',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-  };
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
 
   try {
-    const body = await req.json();
-    const { messages, currentState } = body;
+    const { messages, currentState } = req.body;
 
     // Validate request
     if (!messages || messages.length === 0) {
-      return new Response(JSON.stringify({ error: 'Missing or empty messages array' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      res.write(`data: ${JSON.stringify({ error: 'Missing or empty messages array' })}\n\n`);
+      return res.end();
     }
 
     if (!currentState) {
-      return new Response(JSON.stringify({ error: 'Missing currentState' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      res.write(`data: ${JSON.stringify({ error: 'Missing currentState' })}\n\n`);
+      return res.end();
     }
 
     const userMessage = messages[messages.length - 1];
     if (userMessage.role !== 'user') {
-      return new Response(JSON.stringify({ error: 'Last message must be from user' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      res.write(`data: ${JSON.stringify({ error: 'Last message must be from user' })}\n\n`);
+      return res.end();
     }
 
     const userQuery = typeof userMessage.content === 'string' ? userMessage.content : '';
     if (!userQuery) {
-      return new Response(JSON.stringify({ error: 'User message content is empty' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      res.write(`data: ${JSON.stringify({ error: 'User message content is empty' })}\n\n`);
+      return res.end();
     }
 
     // Determine next state based on user input
     const calculatedNextState = nextState(currentState, userQuery);
     
-    // Retrieve context
+    // Retrieve context (simplified for this example)
     let contextString = "No relevant context found.";
     try {
       const retrievedDocs = await retrieveContext(userQuery, 3);
@@ -89,55 +71,37 @@ export default async function handler(req) {
       ...messages.slice(-10).map(msg => ({ role: msg.role, content: msg.content }))
     ];
 
-    // Create a new TransformStream for streaming the response
-    const stream = new TransformStream();
-    const writer = stream.writable.getWriter();
+    // Call DeepSeek API & stream response
+    try {
+      const aiStream = await deepseekClient.chat.completions.create({
+        model: "deepseek-chat",
+        messages: messagesForAPI,
+        stream: true,
+        temperature: 0.7,
+      });
 
-    // Start the response streaming
-    const responseStream = stream.readable;
-    
-    // Asynchronously process the response
-    (async () => {
-      try {
-        // Call DeepSeek API & stream response
-        const aiStream = await deepseekClient.chat.completions.create({
-          model: "deepseek-chat",
-          messages: messagesForAPI,
-          stream: true,
-          temperature: 0.7,
-        });
-
-        // Process each chunk from DeepSeek
-        for await (const chunk of aiStream) {
-          const content = chunk.choices[0]?.delta?.content || "";
-          if (content) {
-            await writer.write(
-              `data: ${JSON.stringify({ chunk: content })}\n\n`
-            );
-          }
+      // Process each chunk from DeepSeek
+      for await (const chunk of aiStream) {
+        const content = chunk.choices[0]?.delta?.content || "";
+        if (content) {
+          res.write(`data: ${JSON.stringify({ chunk: content })}\n\n`);
+          // Flush the response to ensure chunks are sent immediately
+          if (res.flush) res.flush();
         }
-
-        // Send final state update
-        await writer.write(
-          `data: ${JSON.stringify({ done: true, finalState: calculatedNextState })}\n\n`
-        );
-      } catch (error) {
-        console.error("Error streaming from DeepSeek:", error);
-        const errorMessage = error.message || "Error communicating with AI model.";
-        await writer.write(
-          `data: ${JSON.stringify({ error: errorMessage })}\n\n`
-        );
-      } finally {
-        await writer.close();
       }
-    })();
 
-    return new Response(responseStream, { headers });
+      // Send final state update
+      res.write(`data: ${JSON.stringify({ done: true, finalState: calculatedNextState })}\n\n`);
+      return res.end();
+    } catch (error) {
+      console.error("Error streaming from DeepSeek:", error);
+      const errorMessage = error.message || "Error communicating with AI model.";
+      res.write(`data: ${JSON.stringify({ error: errorMessage })}\n\n`);
+      return res.end();
+    }
   } catch (error) {
     console.error('Error in chat handler:', error);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    res.write(`data: ${JSON.stringify({ error: 'Internal server error' })}\n\n`);
+    return res.end();
   }
 }

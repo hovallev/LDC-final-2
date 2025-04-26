@@ -1,58 +1,56 @@
-// /api/_utils/retriever.js
-import { CohereClient } from 'cohere-ai';
+// ui/api/retriever.js
+// Document retrieval using Cohere embeddings for Vercel serverless functions
+const { CohereClient } = require('cohere-ai');
 
 // Initialize Cohere client for embeddings
 const cohereClient = new CohereClient({
   token: process.env.COHERE_API_KEY,
 });
 
-// In-memory cache for embeddings
+// In-memory cache for embeddings (note this will reset on cold starts)
 let documentEmbeddings = null;
 let documentChunks = [];
 
 // Hard-coded document content for essential materials
-// This approach ensures the documents are available in the serverless environment
 const documents = {
   'LDC_Summary': `
-    Leading Disruptive Change (LDC) Framework Summary
-    
-    Concept 1: Change to Remain Unchanged
-    This concept focuses on tying changes to an organization's heritage and core values, 
-    helping staff feel a sense of continuity during disruptive change. For Banco BICE, linking
-    transformational moves to the company's "propósito" reduces resistance to change and preserves
-    organizational identity during the merger with Grupo Security.
-    
-    Concept 2: Strategic Sparring Sessions
-    These are data-backed debates designed to surface hidden disagreements within leadership teams.
-    By creating structured forums for productive conflict, organizations can prevent false consensus
-    and build more robust strategies. In the context of Banco BICE and Grupo Security, these sessions
-    would be particularly valuable for preventing echo chambers between the Matte leadership and
-    ex-Security leadership teams.
-    
-    Concept 3: Adaptive Space
-    This concept involves creating autonomy and resource pools for experiments and innovation.
-    It allows new mixed teams to launch Banking-as-a-Service or wealth management pilots without
-    risking the core Return on Equity metrics. Creating this adaptive space enables innovation
-    to flourish while maintaining business stability during disruptive change periods.
-  `,
+Leading Disruptive Change (LDC) Framework Summary
+
+Concept 1: Change to Remain Unchanged
+This concept focuses on tying changes to an organization's heritage and core values, 
+helping staff feel a sense of continuity during disruptive change. For Banco BICE, linking
+transformational moves to the company's "propósito" reduces resistance to change and preserves
+organizational identity during the merger with Grupo Security.
+
+Concept 2: Strategic Sparring Sessions
+These are data-backed debates designed to surface hidden disagreements within leadership teams.
+By creating structured forums for productive conflict, organizations can prevent false consensus
+and build more robust strategies. In the context of Banco BICE and Grupo Security, these sessions
+would be particularly valuable for preventing echo chambers between the Matte leadership and
+ex-Security leadership teams.
+
+Concept 3: Adaptive Space
+This concept involves creating autonomy and resource pools for experiments and innovation.
+It allows new mixed teams to launch Banking-as-a-Service or wealth management pilots without
+risking the core Return on Equity metrics. Creating this adaptive space enables innovation
+to flourish while maintaining business stability during disruptive change periods.`,
   'BICECORP_Summary': `
-    BICECORP Summary
-    
-    BICECORP is a diversified financial services holding company in Chile, with Banco BICE as its
-    primary subsidiary. The company has a strong tradition of conservative risk management and focus
-    on high-net-worth individual banking and corporate banking services.
-    
-    Key characteristics include:
-    - Founded with a heritage tied to traditional Chilean industrial families
-    - Strong emphasis on personalized service and relationship banking
-    - Conservative approach to growth and risk management
-    - Expertise in wealth management and corporate banking
-    - Focus on maintaining high service quality rather than competing solely on price
-    
-    The potential merger with Grupo Security represents a significant change to the company's
-    historical independent trajectory, bringing both opportunities for expansion and challenges
-    related to cultural integration and maintaining its distinctive service approach.
-  `
+BICECORP Summary
+
+BICECORP is a diversified financial services holding company in Chile, with Banco BICE as its
+primary subsidiary. The company has a strong tradition of conservative risk management and focus
+on high-net-worth individual banking and corporate banking services.
+
+Key characteristics include:
+- Founded with a heritage tied to traditional Chilean industrial families
+- Strong emphasis on personalized service and relationship banking
+- Conservative approach to growth and risk management
+- Expertise in wealth management and corporate banking
+- Focus on maintaining high service quality rather than competing solely on price
+
+The potential merger with Grupo Security represents a significant change to the company's
+historical independent trajectory, bringing both opportunities for expansion and challenges
+related to cultural integration and maintaining its distinctive service approach.`
 };
 
 /**
@@ -137,8 +135,11 @@ async function initializeEmbeddings() {
 
 /**
  * Retrieve relevant document chunks for a query
+ * @param {string} query - The user query
+ * @param {number} maxResults - Maximum number of results to return
+ * @returns {Array} Array of relevant document chunks
  */
-export async function retrieveContext(query, maxResults = 3) {
+async function retrieveContext(query, maxResults = 3) {
   try {
     await initializeEmbeddings();
     
@@ -174,3 +175,7 @@ export async function retrieveContext(query, maxResults = 3) {
     return [];
   }
 }
+
+module.exports = {
+  retrieveContext
+};

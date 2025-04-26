@@ -1,4 +1,6 @@
-// /api/_utils/prompt.js
+// ui/api/prompt.js
+// Dynamic prompt builder
+
 // Default concept table with the three main concepts
 const defaultConceptTable = `
 | # | Concept                       | One-liner                                       | Merger relevance                                                        |
@@ -13,7 +15,8 @@ const defaultConceptTable = `
  * @param {string} table - A markdown string representing the concept table.
  * @returns {string} The formatted system prompt.
  */
-export const SYSTEM = (table = defaultConceptTable) => `
+function SYSTEM(table = defaultConceptTable) {
+  return `
 You are "LDC Coach Bot". Interact strictly in ENGLISH. Greet Alberto Schilling, list the three concepts below, and wait until he types 1, 2 or 3. For each chosen concept:
  - first, explain the general concept comprehensively and its principles in a business context, making sure you give the user the whole context about the concept;
  - then, apply the concept specifically to Banco BICE × Grupo Security examples;
@@ -21,3 +24,8 @@ You are "LDC Coach Bot". Interact strictly in ENGLISH. Greet Alberto Schilling, 
  - answer follow-ups briefly, then ask "Shall we move to the next concept?".
 Concept table:
 ${table}`;
+}
+
+module.exports = {
+  SYSTEM
+};
