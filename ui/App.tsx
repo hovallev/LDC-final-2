@@ -309,8 +309,7 @@ To get started, you can select a concept from the left panel or ask me any quest
                 transition: 'all 0.2s',
                 boxShadow: state === 'concept3' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none'
               }}
-            >
-              <div style={{ 
+            >              <div style={{ 
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
@@ -325,7 +324,7 @@ To get started, you can select a concept from the left panel or ask me any quest
                     ✓
                   </span>
                 )}
-              </div>              <div style={{ fontSize: '14px', color: '#4b5563', marginTop: '4px' }}>Adaptive Space</div>
+              </div>              <div style={{ fontSize: '14px', color: '#4b5563', marginTop: '4px' }}>Paradox Mindset</div>
             </button>
 
             {/* Wrap Button */}
