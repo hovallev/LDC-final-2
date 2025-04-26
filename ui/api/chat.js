@@ -1,5 +1,5 @@
 // Simplified API handler for Vercel serverless functions
-const { NextResponse } = require('next/server');
+// No need to import NextResponse for basic API functionality
 
 // Basic state machine - simplified from your fsm.js
 function nextState(currentState, userInput) {
@@ -36,7 +36,7 @@ async function generateResponse(messages, state) {
 }
 
 // Main API handler
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
