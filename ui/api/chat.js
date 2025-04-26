@@ -1,123 +1,83 @@
-// Serverless API function for handling chat requests on Vercel
-// Full implementation of the LDC Coach Bot backend
-const OpenAI = require('openai');
-const fsm = require('./fsm');
-const prompt = require('./prompt');
-const retriever = require('./retriever');
+// Simplified API handler for Vercel serverless functions
+const { NextResponse } = require('next/server');
 
-// Initialize the OpenAI/DeepSeek API client
-const openai = new OpenAI({
-  apiKey: process.env.DEEPSEEK_API_KEY || process.env.OPENAI_API_KEY,
-  baseURL: "https://api.deepseek.com/v1", // Use DeepSeek API if available
-});
+// Basic state machine - simplified from your fsm.js
+function nextState(currentState, userInput) {
+  const input = (userInput || "").trim().toLowerCase();
+  
+  // Handle direct number inputs (1, 2, 3)
+  if (['1', '2', '3'].includes(input)) {
+    return `concept${input}`;
+  }
+  
+  // Default: remain in current state
+  return currentState;
+}
 
-// This function processes the chat request and streams responses
+// Generate a response based on state
+async function generateResponse(messages, state) {
+  // A simple, hardcoded response system for testing
+  const lastMessage = messages[messages.length - 1]?.content || '';
+  
+  if (state === 'intro') {
+    return "Welcome to the LDC Coach Bot! I can help you learn about the three Leading Disruptive Change concepts. Type 1, 2, or 3 to select a concept.";
+  }
+  else if (state === 'concept1') {
+    return "You've selected Concept 1: Change to Remain Unchanged. This concept focuses on tying changes to an organization's heritage and core values. For Banco BICE, this means linking transformational moves to the company's purpose.";
+  }
+  else if (state === 'concept2') {
+    return "You've selected Concept 2: Strategic Sparring Sessions. These are data-backed debates designed to surface hidden disagreements within leadership teams.";
+  }
+  else if (state === 'concept3') {
+    return "You've selected Concept 3: Adaptive Space. This concept involves creating autonomy and resource pools for experiments and innovation.";
+  }
+  
+  return `I received your message: "${lastMessage}". What would you like to know about Leading Disruptive Change?`;
+}
+
+// Main API handler
 export default async function handler(req, res) {
-  // Only handle POST requests
+  // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
-
+  
   try {
-    // Parse incoming request body
-    const { messages, currentState } = req.body;
+    // Parse request body
+    const body = await req.json();
+    const { messages, currentState } = body;
     
-    // Log incoming request data for debugging
-    console.log('Received chat request:', { 
-      messageCount: messages?.length,
-      currentState,
-      lastUserMessage: messages?.length > 0 ? messages[messages.length - 1].content : 'No messages'
-    });
-
-    // Determine the next state based on the last user message
-    const lastUserMessage = messages[messages.length - 1];
-    let newState = currentState;
+    // Log the request for debugging
+    console.log('Received request:', { messagesCount: messages?.length, currentState });
     
-    // Only try to update state if the last message is from the user
-    if (lastUserMessage && lastUserMessage.role === 'user') {
-      newState = nextState(currentState, lastUserMessage.content);
-      console.log(`State transition: ${currentState} -> ${newState}`);
-    }
+    // Get the last user message
+    const lastUserMessage = messages?.find(m => m.role === 'user')?.content || '';
     
-    // Setup headers for server-sent events (SSE)
+    // Determine next state
+    const newState = nextState(currentState, lastUserMessage);
+    
+    // Generate a response
+    const response = await generateResponse(messages, newState);
+    
+    // Set up headers for SSE
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
     
-    try {
-      // Retrieve relevant context based on the user's message
-      let contextInfo = '';
-      if (lastUserMessage && lastUserMessage.role === 'user') {
-        const relevantContext = await retrieveContext(lastUserMessage.content);
-        if (relevantContext && relevantContext.length > 0) {
-          // Format the context for inclusion in the prompt
-          contextInfo = relevantContext.map(ctx => 
-            `From ${ctx.source}:\n${ctx.content}`
-          ).join('\n\n');
-          
-          // Notify the client that context was retrieved
-          res.write(`data: ${JSON.stringify({ 
-            contextInfo: `Retrieved relevant information from ${relevantContext.length} sources`
-          })}\n\n`);
-        }
-      }
-      
-      // Format messages for the AI, including the system prompt and retrieved context
-      const systemPrompt = SYSTEM();
-      const systemWithContext = contextInfo 
-        ? `${systemPrompt}\n\nRelevant context for your reference:\n${contextInfo}`
-        : systemPrompt;
-        
-      const systemMessage = { role: 'system', content: systemWithContext };
-      const aiMessages = [systemMessage, ...messages.map(msg => ({
-        role: msg.role,
-        content: msg.content
-      }))];
-      
-      // Create a streaming completion with the AI model
-      const stream = await openai.chat.completions.create({
-        model: 'deepseek-chat', // Can also use 'gpt-3.5-turbo' or another model
-        messages: aiMessages,
-        stream: true,
-        max_tokens: 2000,
-        temperature: 0.7,
-      });
-      
-      // Stream the response to the client
-      let responseText = '';
-      
-      for await (const chunk of stream) {
-        // Extract the content from the chunk
-        const content = chunk.choices[0]?.delta?.content || '';
-        if (content) {
-          responseText += content;
-          
-          // Send the chunk to the client
-          res.write(`data: ${JSON.stringify({ chunk: content })}\n\n`);
-        }
-      }
-      
-      // Send completion message with the updated state
-      res.write(`data: ${JSON.stringify({ 
-        done: true,
-        finalState: newState
-      })}\n\n`);
-      
-    } catch (streamError) {
-      console.error('Error during streaming:', streamError);
-      
-      // Send error message if streaming fails
-      res.write(`data: ${JSON.stringify({ 
-        chunk: "\n\nI'm sorry, but I encountered an error while generating a response. Please try again later.",
-        error: streamError.message,
-        done: true,
-        finalState: currentState
-      })}\n\n`);
+    // Stream the response in chunks to simulate streaming
+    const chunks = response.match(/.{1,20}/g) || [];
+    
+    for (const chunk of chunks) {
+      res.write(`data: ${JSON.stringify({ chunk })}\n\n`);
+      // Small delay to simulate streaming
+      await new Promise(resolve => setTimeout(resolve, 100));
     }
     
+    // Send completion message
+    res.write(`data: ${JSON.stringify({ done: true, finalState: newState })}\n\n`);
     res.end();
   } catch (error) {
     console.error('API error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 }
