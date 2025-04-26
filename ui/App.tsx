@@ -1,7 +1,7 @@
 // ui/App.tsx
 // Main React chat component with professional UI
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import useChat from './useChat.ts';
 import { stateDisplayNames } from '../src/fsm';
@@ -10,7 +10,8 @@ console.log('App.tsx loaded - Professional UI implemented with enhanced features
 
 function App() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, state, setState, setMessages } = useChat();
-    // Initialize chat with a welcome message if empty
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  // Initialize chat with a welcome message if empty
   useEffect(() => {
     if (messages.length === 0) {
       // Add a welcome message as if it came from the assistant
@@ -31,6 +32,18 @@ To get started, you can select a concept from the left panel or ask me any quest
       ]);
     }
   }, [messages]);
+  
+  // Scroll to bottom when messages change or when loading
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
+  
+  // Automatically scroll to bottom when messages change or when loading state changes
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
   // Function to handle concept selection - now sends just the number to match FSM conditions
   const selectConcept = (conceptNum: number) => {
     // Only allow selecting a concept if it's the next one in sequence or already completed
@@ -357,14 +370,16 @@ To get started, you can select a concept from the left panel or ask me any quest
           height: '100%',
           maxWidth: 'calc(100% - 280px)',
           position: 'relative'
-        }}>          <div style={{ 
+        }}>          <div 
+            ref={messagesContainerRef}
+            style={{ 
             flexGrow: 1, 
             overflowY: 'auto', 
             padding: '12px 20px',
             display: 'flex',
             flexDirection: 'column',
             gap: '10px'
-          }}>            {messages.map((m, index) => (
+          }}>{messages.map((m, index) => (
               <div key={index} style={{ 
                 display: 'flex',
                 justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start',

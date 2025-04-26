@@ -24,23 +24,35 @@ export const stateDisplayNames = {
  * @returns The next conversation state.
  */
 export const nextState = (currentState: State, userInput: string): State => {
-  const trimmedInput = userInput.trim();
-
-  // Transition from intro based on number selection
-  if (currentState === 'intro' && ['1', '2', '3'].includes(trimmedInput)) {
+  const trimmedInput = userInput.trim().toLowerCase();
+  
+  // Handle direct number inputs (1, 2, 3)
+  if (['1', '2', '3'].includes(trimmedInput)) {
     return `concept${trimmedInput}` as State;
   }
-
+  
+  // Handle "concept X" style inputs
+  const conceptMatch = trimmedInput.match(/concept\s*([1-3])/i);
+  if (conceptMatch) {
+    return `concept${conceptMatch[1]}` as State;
+  }
+  
   // Transition between concepts or to wrap-up based on "next"
-  if (currentState.startsWith('concept') && /next/i.test(trimmedInput)) {
-    const currentConceptNumber = Number(currentState.slice(-1));
-    if (currentConceptNumber < 3) {
-      return `concept${currentConceptNumber + 1}` as State;
+  if (/next/i.test(trimmedInput) || /go to wrap-?up/i.test(trimmedInput)) {
+    if (currentState === 'concept1') {
+      return 'concept2';
+    } else if (currentState === 'concept2') {
+      return 'concept3';
+    } else if (currentState === 'concept3') {
+      return 'wrap';
     }
-    // If it was concept3 and user says next, move to wrap-up
+  }
+  
+  // Handle direct wrap-up request
+  if (/wrap-?up/i.test(trimmedInput)) {
     return 'wrap';
   }
 
   // Otherwise, remain in the current state
   return currentState;
-}; 
+};
