@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LDC Coach Bot - Retrieval Tester</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #0f2d52;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .test-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0f2d52;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: #f9f9f9;
+    }
+    .result-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: white;
+    }
+    .result-metadata {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: #666;
+      font-size: 0.9em;
+    }
+    .content-preview {
+      white-space: pre-wrap;
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      overflow-wrap: break-word;
+    }
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: #0f2d52;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .sample-queries {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .sample-query {
+      background-color: #e1effe;
+      border: 1px solid #c3ddfd;
+      color: #1a56db;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .error {
+      color: #e53e3e;
+      padding: 10px;
+      background-color: #fff5f5;
+      border: 1px solid #fed7d7;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>LDC Coach Bot - Retrieval Tester</h1>
+  <p>Use this tool to test document retrieval for the LDC Coach Bot. Enter a query to see what documents are retrieved.</p>
+  
+  <div class="container">
+    <div class="sample-queries">
+      <div class="sample-query" onclick="setQuery('What is Change to Remain Unchanged?')">Change to Remain Unchanged</div>
+      <div class="sample-query" onclick="setQuery('Explain Strategic Sparring Sessions')">Strategic Sparring Sessions</div>
+      <div class="sample-query" onclick="setQuery('Tell me about Adaptive Space')">Adaptive Space</div>
+      <div class="sample-query" onclick="setQuery('How does LDC relate to the BICE merger?')">LDC & BICE merger</div>
+      <div class="sample-query" onclick="setQuery('What are the six propositions?')">Six Propositions</div>
+    </div>
+    
+    <div class="test-form">
+      <input type="text" id="query" placeholder="Enter your query here...">
+      <button onclick="testRetrieval()">Test Retrieval</button>
+    </div>
+    
+    <div class="spinner" id="spinner"></div>
+    
+    <div id="error" class="error" style="display: none;"></div>
+    
+    <div class="results" id="results" style="display: none;">
+      <h2>Results</h2>
+      <div id="metadata"></div>
+      <div id="result-items"></div>
+    </div>
+  </div>
+
+  <script>
+    function setQuery(query) {
+      document.getElementById('query').value = query;
+    }
+    
+    async function testRetrieval() {
+      const query = document.getElementById('query').value.trim();
+      if (!query) {
+        alert('Please enter a query');
+        return;
+      }
+      
+      // Show spinner, hide previous results
+      document.getElementById('spinner').style.display = 'block';
+      document.getElementById('results').style.display = 'none';
+      document.getElementById('error').style.display = 'none';
+      
+      try {
+        // Use the test-retrieval endpoint
+        const response = await fetch(`/api/test-retrieval?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        if (response.status !== 200) {
+          throw new Error(data.error || 'Unknown error');
+        }
+        
+        // Display results
+        document.getElementById('metadata').innerHTML = `
+          <p><strong>Query:</strong> ${data.query}</p>
+          <p><strong>Results:</strong> ${data.resultsCount}</p>
+          <p><strong>Time:</strong> ${data.timeTaken}</p>
+        `;
+        
+        const resultsContainer = document.getElementById('result-items');
+        resultsContainer.innerHTML = '';
+        
+        if (data.results.length === 0) {
+          resultsContainer.innerHTML = '<p>No results found</p>';
+        } else {
+          data.results.forEach((result, index) => {
+            const resultElement = document.createElement('div');
+            resultElement.className = 'result-item';
+            resultElement.innerHTML = `
+              <div class="result-metadata">
+                <div><strong>Source:</strong> ${result.source}</div>
+                <div><strong>Similarity:</strong> ${result.similarity !== undefined ? result.similarity.toFixed(3) : 'N/A'}</div>
+              </div>
+              <strong>Preview:</strong>
+              <div class="content-preview">${result.preview}</div>
+              <details>
+                <summary>Show full content</summary>
+                <div class="content-preview">${result.content}</div>
+              </details>
+            `;
+            resultsContainer.appendChild(resultElement);
+          });
+        }
+        
+        document.getElementById('results').style.display = 'block';
+      } catch (error) {
+        console.error('Error:', error);
+        const errorElement = document.getElementById('error');
+        errorElement.textContent = `Error: ${error.message}`;
+        errorElement.style.display = 'block';
+      } finally {
+        document.getElementById('spinner').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
